@@ -3,9 +3,9 @@ import { auth } from "@/lib/auth";
 import { getCurrentUser } from "@/lib/session";
 
  
-const page = async () => {
+const ProfilePage = async () => {
     const session = await getCurrentUser()
     return ( <ProfileForm user={session}/> );
 }
  
-export default page;
+export default ProfilePage;

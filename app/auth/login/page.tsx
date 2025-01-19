@@ -5,7 +5,7 @@ import LoginForm from "@/components/auth/login-form";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { FaChevronLeft } from "react-icons/fa";
-const page= () => {
+const LoginPage= () => {
     const router = useRouter()
     return ( 
     <>
@@ -17,4 +17,4 @@ const page= () => {
     </> );
 }
  
-export default page;
+export default LoginPage;

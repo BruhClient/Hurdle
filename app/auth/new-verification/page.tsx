@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
  
-const page =  () => {
+const NewVerificationPage =  () => {
 
     const searchParams = useSearchParams() 
 
@@ -17,4 +17,4 @@ const page =  () => {
         </div> );
 }
  
-export default page;
+export default NewVerificationPage;
