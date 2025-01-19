@@ -9,7 +9,7 @@ export const getPasswordResetTokenByToken = async (token :string) => {
             }
         }) 
         return passwordToken
-    } catch(error ) { 
+    } catch { 
         return null
     }
 }
@@ -22,7 +22,7 @@ export const getPasswordResetTokenByEmail = async (email :string) => {
             }
         }) 
         return passwordToken
-    } catch(error ) { 
+    } catch { 
         return null
     }
 }

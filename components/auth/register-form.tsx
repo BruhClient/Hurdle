@@ -1,7 +1,7 @@
 "use client"
 
 import { CardWrapper } from "./card-wrapper";
-import { Form,FormControl,FormDescription,FormItem,FormLabel,FormField, FormMessage } from "../ui/form";
+import { Form,FormControl,FormItem,FormLabel,FormField, FormMessage } from "../ui/form";
 import { useForm } from "react-hook-form";
 import { RegisterPayload,RegisterSchema } from "@/schema/register";
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -9,7 +9,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Social } from "./socials";
-import { startTransition, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
 import { register } from "@/actions/register";

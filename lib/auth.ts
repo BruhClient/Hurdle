@@ -6,7 +6,6 @@ import { prisma } from "./prisma"
 import authConfig from "@/config/auth.config"
 import { getUserByEmail, getUserById } from "./users"
 import { getTwoFactorAuthConfimrationByUserId } from "./twofactor-confimration"
-import { MdToken } from "react-icons/md"
 import { UserRole } from "@prisma/client"
 import { getAccountByUserId } from "./account"
 

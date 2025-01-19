@@ -16,10 +16,8 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { ProfileSettingsSchema,ProfileSettingsPayload } from "@/schema/profile-settings";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Session, UserRole } from "@prisma/client";
 import { Switch } from "../ui/switch";
 import { useSession } from "next-auth/react";
 import { useState, useTransition } from "react";

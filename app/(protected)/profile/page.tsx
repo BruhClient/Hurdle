@@ -1,5 +1,4 @@
 import ProfileForm from "@/components/auth/profile-form";
-import { auth } from "@/lib/auth";
 import { getCurrentUser } from "@/lib/session";
 
  

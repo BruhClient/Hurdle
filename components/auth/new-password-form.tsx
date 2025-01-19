@@ -11,7 +11,6 @@ import { useState, useTransition } from "react";
 import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
 import { newPasswordPayload, newPasswordSchema } from "@/schema/reset-password";
-import { reset } from "@/actions/reset";
 import { useSearchParams } from "next/navigation";
 import { newPassword } from "@/actions/new-password";
 

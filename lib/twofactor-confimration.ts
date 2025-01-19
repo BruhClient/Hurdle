@@ -10,7 +10,7 @@ export const getTwoFactorAuthConfimrationByUserId = async (userId : string) =>  
             }
         })
         return TwoFactorToken
-    } catch (error) { 
+    } catch  { 
         return null
     }
 

@@ -10,7 +10,7 @@ export const getTwoFactorAuthTokenByToken = async (token : string) =>  {
             }
         })
         return TwoFactorToken
-    } catch (error) { 
+    } catch { 
         return null
     }
 
@@ -24,7 +24,7 @@ export const getTwoFactorAuthTokenByEmail = async (email : string) =>  {
             }
         })
         return TwoFactorToken
-    } catch (error) { 
+    } catch  { 
         return null
     }
 }

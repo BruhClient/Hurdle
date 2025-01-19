@@ -12,7 +12,7 @@ import { Social } from "./socials";
 import { useState, useTransition } from "react";
 import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
-import {  useRouter, useSearchParams } from "next/navigation";
+import {  useSearchParams } from "next/navigation";
 import { login } from "@/actions/login";
 
 const LoginForm= ({isModal} : {isModal : boolean}) => {
@@ -23,7 +23,7 @@ const LoginForm= ({isModal} : {isModal : boolean}) => {
     const [error,setError] = useState<string | undefined>("")
     const [success,setSuccess] = useState<string | undefined>("")
     const [isPending,startTransition] = useTransition()
-    const router = useRouter()
+    
     
     
 

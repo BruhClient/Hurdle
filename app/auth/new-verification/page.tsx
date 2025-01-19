@@ -2,7 +2,6 @@
 
 import { VerificationForm } from "@/components/auth/verification-form";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
  
 const NewVerificationPage =  () => {
