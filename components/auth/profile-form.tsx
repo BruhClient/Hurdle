@@ -37,7 +37,7 @@ const ProfileForm = ({user} : {user : any}) => {
         
         resolver : zodResolver(ProfileSettingsSchema), 
         defaultValues : { 
-            name : user.name || undefined, 
+            username : user.username || undefined, 
             email : user.email || undefined , 
             password : undefined , 
             newPassword :undefined , 
@@ -87,11 +87,11 @@ const ProfileForm = ({user} : {user : any}) => {
                 <div className="flex flex-col">
                     <FormField
                         control={form.control}
-                        name="name"
+                        name="username"
                         
                         render={({ field }) => (
                             <FormItem>
-                            <FormLabel>Name</FormLabel>
+                            <FormLabel>Username</FormLabel>
                             <FormControl>
                                 <Input required={false} {...field} placeholder={user?.name ?? ""} disabled={isPending} type="text" />
                             </FormControl>

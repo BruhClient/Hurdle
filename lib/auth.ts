@@ -8,6 +8,7 @@ import { getUserByEmail, getUserById } from "./users"
 import { getTwoFactorAuthConfimrationByUserId } from "./twofactor-confimration"
 import { UserRole } from "@prisma/client"
 import { getAccountByUserId } from "./account"
+import {nanoid} from "nanoid"
 
 export const { 
     handlers : {GET,POST}, 
@@ -66,18 +67,36 @@ export const {
             if (!token) { 
                 return token
             }
-          
+            console.log(token)
 
             const existingUser = await getUserByEmail(token.email ?? "") 
-
+            
+            
             if (!existingUser) { 
                 return token
             }
+
+            
+
+            
             const existingAccount = await getAccountByUserId(existingUser.id) 
 
+            // For Oauth with missing username in User model
+            if (existingAccount) { 
+                if (!existingUser.username) { 
+                    await prisma.user.update({ 
+                        where : { 
+                            id : existingUser.id
+                        } , 
+                        data : { 
+                            username : nanoid(10)
+                        }
+                    })
+                }
+            }
             return { 
                 email : existingUser.email, 
-                name : existingUser.name , 
+                username : existingUser.username , 
                 picture : existingUser.image, 
                 id : existingUser.id, 
                 twoFactor : existingUser.isTwoFactorEnabled, 
@@ -98,7 +117,7 @@ export const {
                 session.user.id = token.id as string
                 session.user.role = token.role as UserRole
                 session.user.email = token.email as string
-                session.user.name = token.name as string 
+                session.user.username = token.username as string 
                 session.user.image  = token.picture as string | undefined
                 session.user.isOauth = token.isOauth as boolean
                  

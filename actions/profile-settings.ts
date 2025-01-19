@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs"
 import { sendVerificationEmail } from "@/lib/mail";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/session";
-import { getUserByEmail, getUserById } from "@/lib/users";
+import { getUserByEmail, getUserById, getUserByUsername } from "@/lib/users";
 import { generateVerificationToken } from "@/lib/verification-token";
 import { ProfileSettingsPayload } from "@/schema/profile-settings";
 
@@ -34,6 +34,34 @@ export const settings = async (values : ProfileSettingsPayload) => {
         values.password = undefined 
         values.newPassword = undefined
         
+    }
+   
+
+    
+    if (values.username !== undefined)  { 
+        if (!values.username) { 
+            return { 
+                error : "Username cannot be empty"
+            }
+        }
+
+        
+        if (session.username !== values.username) { 
+            const existingUser = await getUserByUsername(values?.username)
+
+
+            if (existingUser) { 
+                return { 
+                    error : "Username already exists"
+                }
+            }
+        }
+        
+        
+        
+        
+
+
     }
 
 

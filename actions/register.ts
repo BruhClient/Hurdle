@@ -2,7 +2,7 @@
 
 import { sendVerificationEmail } from "@/lib/mail"
 import { prisma } from "@/lib/prisma"
-import { getUserByEmail } from "@/lib/users"
+import { getUserByEmail, getUserByUsername } from "@/lib/users"
 import { generateVerificationToken } from "@/lib/verification-token"
 import { RegisterPayload, RegisterSchema } from "@/schema/register"
 import bcrypt from "bcryptjs"
@@ -15,7 +15,7 @@ export const register  = async (data : RegisterPayload) => {
         return {error : "Invalid Regiser Request"}
      }
 
-     const {email,password,name} = validatedFields.data
+     const {email,password,username} = validatedFields.data
      try { 
         const existingUser = await getUserByEmail(email) 
     
@@ -24,11 +24,19 @@ export const register  = async (data : RegisterPayload) => {
             const hashedPassword = await bcrypt.hash(password,10)
 
             
+
+            const existingUsername = await getUserByUsername(username) 
+
+            if (existingUsername) { 
+                return { 
+                    error : "Username already in use."
+                }
+            }
             await prisma.user.create({
                 data : {
                     email , 
                     password : hashedPassword, 
-                    name , 
+                    username , 
                     
                     
 

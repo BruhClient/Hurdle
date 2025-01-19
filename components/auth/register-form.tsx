@@ -24,7 +24,7 @@ const RegisterForm= ({isModal} : {isModal : boolean}) => {
         defaultValues : { 
             email : "" , 
             password : "" , 
-            name : ""
+            username : ""
         }   
     })
 
@@ -65,12 +65,12 @@ const RegisterForm= ({isModal} : {isModal : boolean}) => {
                     />
                     <FormField
                     control={form.control}
-                    name="name"
+                    name="username"
                     render={({ field }) => (
                         <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel>Username</FormLabel>
                         <FormControl>
-                            <Input placeholder="Name ..." {...field} disabled={isPending}/>
+                            <Input placeholder="Username ..." {...field} disabled={isPending}/>
                         </FormControl>
 
                         <FormMessage />
