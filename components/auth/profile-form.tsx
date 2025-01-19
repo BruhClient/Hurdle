@@ -22,6 +22,7 @@ import { Switch } from "../ui/switch";
 import { useSession } from "next-auth/react";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { UserRole } from "@prisma/client";
 
 
 
@@ -57,7 +58,7 @@ const ProfileForm = ({user} : {user : any}) => {
           );
         
         startTransition(()=> {
-            settings(filteredData).then((data) => { 
+            settings(filteredData as ProfileSettingsPayload ).then((data) => { 
                 if (data.error) { 
                     setError(data.error)
                 }

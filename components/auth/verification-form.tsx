@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { CardWrapper } from "./card-wrapper"
 import {BeatLoader} from "react-spinners"
 import { newVerification } from "@/actions/verification-token"
