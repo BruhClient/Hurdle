@@ -9,7 +9,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { LoginPayload, LoginSchema } from "@/schema/login";
 import { Social } from "./socials";
-import { useState, useTransition } from "react";
+import { Suspense, useState, useTransition } from "react";
 import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
 import {  useSearchParams } from "next/navigation";
@@ -63,7 +63,7 @@ const LoginForm= ({isModal} : {isModal : boolean}) => {
         })
 
     }
-    return ( <div><CardWrapper title="Login" description="Welcome to Huddle Up !" isModal={isModal} >
+    return ( <CardWrapper title="Login" description="Welcome to Huddle Up !" isModal={isModal} >
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
                 {showTwoFactor && <FormField
@@ -122,12 +122,13 @@ const LoginForm= ({isModal} : {isModal : boolean}) => {
                 </form>
             </Form>
             <Button variant={"link"} className="px-0 text-sm opacity-40 hover:opacity-100 ml-1" ><Link href={"/auth/reset"}>Forgot password ?</Link></Button>
-            <Social />
+            <Suspense><Social /></Suspense>
+            
             <Button asChild variant={"link"} className=" w-full mt-3">
                 <Link href={"/auth/register"} >Don't have an account ?</Link>
             </Button>
          
-        </CardWrapper></div> );
+        </CardWrapper> );
 }
  
 export default LoginForm;

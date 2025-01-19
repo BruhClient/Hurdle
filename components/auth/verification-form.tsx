@@ -8,14 +8,18 @@ import FormSuccess from "../FormSuccess"
 import FormError from "../FormError"
 import { Button } from "../ui/button"
 import Link from "next/link"
-export const VerificationForm = ({token} : {token : string | null}) => { 
+import { useSearchParams } from "next/navigation"
+export const VerificationForm = () => { 
+    const searchParams = useSearchParams() 
+
+    const token = searchParams.get("token") 
 
     const [error,setError] = useState("")
     const [success,setSuccess] = useState("")
     
     useEffect(
         () => { 
-            
+           
             if (success || error) { 
                 return 
             }
@@ -39,7 +43,7 @@ export const VerificationForm = ({token} : {token : string | null}) => {
 
     return <CardWrapper title ="Verification" description="Verification attempt complete" isModal={false}>
         <div>
-            {!token && !success && !error ? <BeatLoader size={80} /> : ""}
+            {!token && !success && !error ? <BeatLoader size={30} className="text-center "/> : ""}
             {success ? <FormSuccess message={success}/> :""}
             {error ? <FormError message={error} /> : ""}
             <Button variant={"link"} className="text-card-foreground w-full mt-6"><Link href={"/auth/login"}>Head back to login page</Link></Button>

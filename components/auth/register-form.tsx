@@ -9,7 +9,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Social } from "./socials";
-import { useState, useTransition } from "react";
+import { Suspense, useState, useTransition } from "react";
 import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
 import { register } from "@/actions/register";
@@ -43,7 +43,7 @@ const RegisterForm= ({isModal} : {isModal : boolean}) => {
         })
         
     }
-    return ( <div><CardWrapper title="Register" description="Welcome to Huddle Up !" isModal={isModal} >
+    return ( <CardWrapper title="Register" description="Welcome to Huddle Up !" isModal={isModal} >
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
                 
@@ -101,11 +101,11 @@ const RegisterForm= ({isModal} : {isModal : boolean}) => {
          
             </Form>
 
-            <Social />
+            <Suspense><Social /></Suspense>
             <Button asChild variant={"link"} className="text-card-foreground w-full mt-3">
                 <Link href={"/auth/login"} >Already have an account ?</Link>
             </Button>
-        </CardWrapper></div> );
+        </CardWrapper> );
 }
  
 export default RegisterForm;

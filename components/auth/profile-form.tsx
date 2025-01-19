@@ -55,10 +55,10 @@ const ProfileForm = ({user} : {user : any}) => {
         setSuccess("")
         const filteredData = Object.fromEntries(
             Object.entries(values).filter(([_, value]) => value !== undefined)
-          );
+          ) as ProfileSettingsPayload
         
         startTransition(()=> {
-            settings(filteredData as ProfileSettingsPayload ).then((data) => { 
+            settings(filteredData ).then((data) => { 
                 if (data.error) { 
                     setError(data.error)
                 }
@@ -81,6 +81,7 @@ const ProfileForm = ({user} : {user : any}) => {
     
    
     return ( <div className="flex justify-center  mt-5 px-3">
+        
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 max-w-[500px] flex flex-col gap-3" >
                 <div className="flex flex-col">

@@ -50,7 +50,7 @@ const NewPasswordForm= () => {
         })
 
     }
-    return ( <div><CardWrapper title="Reset Password" description="Enter your new password" isModal={false} >
+    return ( <CardWrapper title="Reset Password" description="Enter your new password" isModal={false} >
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
                 
@@ -83,7 +83,7 @@ const NewPasswordForm= () => {
                 <Link href={"/auth/login"} >Back to login</Link>
             </Button>
          
-        </CardWrapper></div> );
+        </CardWrapper> );
 }
  
 export default NewPasswordForm;
