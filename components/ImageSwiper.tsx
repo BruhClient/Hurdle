@@ -46,7 +46,7 @@ const ImageSwiper =  ({images} : ImageSwiperProps) => {
       
     <CarouselContent>
     {images.map((url) => { 
-        return <CarouselItem className="p-0" key={url}><img src={url} alt=""  loading='lazy' /></CarouselItem>
+        return <CarouselItem className="p-0 " key={url}><img className="object-contain max-h-[600px] w-full" src={url} alt=""  loading='lazy' /></CarouselItem>
       })}
     </CarouselContent>
     <div className="ext-sm text-muted-foreground absolute top-2 right-4">
