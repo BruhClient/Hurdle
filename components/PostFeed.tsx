@@ -9,7 +9,7 @@ import axios from "axios";
 import PostDisplay from "./Post";
 import { ExtendedPost } from "@/types/post";
 import { SkeletonCard } from "./SkeletonCard";
-import { Like, Post } from "@prisma/client";
+import { Like } from "@prisma/client";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
 
@@ -21,6 +21,7 @@ const PostFeed = () => {
     })
 
     const user = useCurrentUser()
+    
 
     const {data,hasNextPage,fetchNextPage,isFetching} = useInfiniteQuery(
         {
@@ -66,7 +67,6 @@ const PostFeed = () => {
     
     
     
- 
     return ( <div className="flex flex-col gap-3  justify-center mt-3 items-center">
         {posts?.map((post,index) => {
             

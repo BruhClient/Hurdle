@@ -1,6 +1,8 @@
 import authConfig from "./config/auth.config"
 import NextAuth from "next-auth"
 import { DEFAULT_LOGIN_REDIRECT,apiAuthPrefix,authRoutes,publicRoutes } from "./routes"
+import next from "next"
+import { revalidatePath } from "next/cache"
 
 const {auth} = NextAuth(authConfig)
 
@@ -19,6 +21,7 @@ export default auth((req) => {
 
     const isAuthRoute = authRoutes.includes(nextUrl.pathname)
 
+    
     if (isApiAuthRoute) { 
         return 
     }
@@ -42,6 +45,8 @@ export default auth((req) => {
         return Response.redirect(new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`,nextUrl))
     }
 
+
+   
     return 
 
 })

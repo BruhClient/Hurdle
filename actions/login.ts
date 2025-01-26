@@ -10,6 +10,7 @@ import { AuthError } from "next-auth"
 import { generateTwoFactorAuthToken, getTwoFactorAuthTokenByEmail } from "@/lib/twofactor-auth-token"
 import { prisma } from "@/lib/prisma"
 import { getTwoFactorAuthConfimrationByUserId } from "@/lib/twofactor-confimration"
+import { revalidatePath } from "next/cache"
 export const login = async (data : LoginPayload , callbackUrl : string | null ) => {
     
     const validatedFields = LoginSchema.safeParse(data)
@@ -93,17 +94,23 @@ export const login = async (data : LoginPayload , callbackUrl : string | null ) 
     
     try { 
 
+      
         
-
         
         await signIn("credentials" , { 
             email , 
             password,
-            redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
-           
-            
-          
+            redirect:false
+
         })
+
+        
+      
+        
+
+        
+
+        
 
         
         return { 

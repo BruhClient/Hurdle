@@ -12,8 +12,9 @@ import { Social } from "./socials";
 import { Suspense, useState, useTransition } from "react";
 import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
-import {  useSearchParams } from "next/navigation";
+import {  useRouter, useSearchParams } from "next/navigation";
 import { login } from "@/actions/login";
+import { useSession } from "next-auth/react";
 
 const LoginForm= ({isModal} : {isModal : boolean}) => {
     const searchParams = useSearchParams()
@@ -23,8 +24,8 @@ const LoginForm= ({isModal} : {isModal : boolean}) => {
     const [error,setError] = useState<string | undefined>("")
     const [success,setSuccess] = useState<string | undefined>("")
     const [isPending,startTransition] = useTransition()
-    
-    
+    const router = useRouter()
+    const {update} = useSession()
     
 
     const form = useForm<LoginPayload>({ 
@@ -47,6 +48,9 @@ const LoginForm= ({isModal} : {isModal : boolean}) => {
                 if (data?.success) { 
                     
                     setSuccess(data?.success)
+                    update()
+                    router.refresh()
+                    
                 }
                 if (data?.error) { 
                     

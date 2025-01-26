@@ -1,14 +1,16 @@
+"use client"
+
 import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
-import { Button } from "./ui/button";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
-import { LikePayload } from "@/schema/like";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import { usePrevious } from "@mantine/hooks";
 import { CommentLikePayload } from "@/schema/comment-like";
 import { useRouter } from "next/navigation";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import useCustomToast from "@/hooks/usecustomtoast";
 
 interface CommentLikeButtonProps {
     commentId :string ,
@@ -19,8 +21,8 @@ interface CommentLikeButtonProps {
 }
  
 const CommentLikeButton: FunctionComponent<CommentLikeButtonProps> = ({initialLikes,currentCommentLike,commentId,setLikes}) => {
-
-
+    const {loginToast} = useCustomToast()
+    const user = useCurrentUser()
     const [isLiked,setIsLiked] = useState<boolean>(currentCommentLike)
     const router = useRouter()
     const {toast} = useToast()
@@ -59,8 +61,19 @@ const CommentLikeButton: FunctionComponent<CommentLikeButtonProps> = ({initialLi
             })
         }
     })
+
+
+    const onClick = () => { 
+
+        if (user) { 
+            like({commentId})
+        } else {
+            loginToast()
+         }
+        
+    }
     return ( <div className="flex gap-2">
-            <button onClick={() => like({commentId})}  >
+            <button onClick={onClick}  >
         <Heart size={15} className={cn({"text-red-500 fill-red-500" : isLiked === true})} /> 
     </button>
 

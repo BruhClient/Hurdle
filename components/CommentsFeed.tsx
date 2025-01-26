@@ -9,6 +9,7 @@ import CommentsInput from "./CommentsInput";
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";;
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { Skeleton } from "./ui/skeleton";
 
 interface CommentsFeedProps {
     postId : string
@@ -82,6 +83,9 @@ const CommentsFeed: FunctionComponent<CommentsFeedProps> = ({postId}) => {
        
                 return <Comment id={comment.id} key={comment.id } author={comment.author} message={comment.message} createdAt={comment.createdAt} currentLikeAmt={comment.likes.length} currentLike={currentLike}/> 
             })}
+            {
+                isFetching ? <Skeleton className="w-full h-8"/> : ""
+            }
 
             {!isFetching && hasNextPage ? (<Button variant={"outline"} onClick={() => {
                 fetchNextPage()

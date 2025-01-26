@@ -130,7 +130,8 @@ const ProfileForm = ({user} : {user : any}) => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-[500px] flex flex-col gap-3 " >
             <div className=" self-center">
 
-            <SingleImageDropzone
+            <SingleImageDropzone 
+            
                     userImage={user.image}
                     width={200}
                     height={200}

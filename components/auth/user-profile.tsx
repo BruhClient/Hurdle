@@ -33,9 +33,6 @@ import {
 import { signOut } from "next-auth/react";
 import { FaUser } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { Button } from "../ui/button";
-import { Label } from "@radix-ui/react-dropdown-menu";
-import { Input } from "../ui/input";
 import CreatePostForm from "../CreatePostForm";
 const UserProfile = ({session} :{session : Session}) => {
 
@@ -47,7 +44,7 @@ const UserProfile = ({session} :{session : Session}) => {
         <DropdownMenu  >
           <DropdownMenuTrigger asChild>
           <Avatar >
-          <AvatarImage src={session.user?.image ?? undefined} alt="@shadcn" />
+          <AvatarImage src={session.user?.image ?? undefined} className="object-cover" alt="@shadcn" />
           <AvatarFallback className="bg-card"><FaUser /></AvatarFallback>
           </Avatar>
           </DropdownMenuTrigger>

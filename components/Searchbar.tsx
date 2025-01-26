@@ -47,7 +47,6 @@ import { Button } from "./ui/button"
       return data as User[]
     },[data])
 
-    console.log(users)
 
     
     return (
