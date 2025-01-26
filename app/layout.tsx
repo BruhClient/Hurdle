@@ -5,6 +5,8 @@ import { Jua } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/providers/provider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
+import { Toaster } from "@/components/ui/toaster";
 
 
 const jua = Jua({
@@ -33,6 +35,8 @@ export default function RootLayout({
     
     <html lang="en">
       <Providers>
+        
+        <EdgeStoreProvider>
         <body
           className={`${jua.variable} font-jua antialiased`}
         >
@@ -42,7 +46,10 @@ export default function RootLayout({
           {children}
           
           {authModal}
+          <Toaster />
         </body>
+        
+        </EdgeStoreProvider>
       </Providers>
       
     </html>

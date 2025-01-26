@@ -1,3 +1,4 @@
+import PostFeed from "@/components/PostFeed";
 
 
 
@@ -6,9 +7,9 @@ export default async function Home() {
  
 
   return (
-    <div className="">
+    <div className="mb-5">
 
-        Home page
+        <PostFeed />
     </div>
   );
 }

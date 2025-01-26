@@ -1,0 +1,3 @@
+export const DEFAULT_REFETCH_LIMIT = 2
+
+export const DEFAULT_COMMENT_REFETCH_LIMIT = 5

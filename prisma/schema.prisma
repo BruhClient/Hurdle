@@ -52,11 +52,18 @@ model User {
   image                 String?
   password              String?
   isTwoFactorEnabled    Boolean                @default(true)
+  followers             Follows[]              @relation("following")
+  following             Follows[]              @relation("follower")
   role                  UserRole               @default(USER)
   twoFactorConfirmation TwoFactorConfirmation?
-
-  accounts Account[]
-  sessions Session[]
+  posts                 Post[]
+  likes                 Like[]
+  commentLikes          CommentLikes[]
+  comment               Comment[]
+  commentReplies        CommentReply[]
+  accounts              Account[]
+  sessions              Session[]
+  CommentReplyLikes     CommentReplyLikes[]
 
   @@map("users")
 }
@@ -100,4 +107,77 @@ model TwoFactorConfirmation {
 enum UserRole {
   USER
   ADMIN
+}
+
+model Post {
+  id        String    @id @default(cuid())
+  images    Json
+  caption   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  likes     Like[]
+  comments  Comment[]
+}
+
+model Like {
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  @@id([userId, postId])
+}
+
+model CommentLikes {
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+
+  @@id([userId, commentId])
+}
+
+model CommentReplyLikes {
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String
+  commentReply   CommentReply @relation(fields: [commentReplyId], references: [id], onDelete: Cascade)
+  commentReplyId String
+
+  @@id([commentReplyId, userId])
+}
+
+model Comment {
+  id        String         @id @default(cuid())
+  author    User           @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  message   String
+  post      Post           @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  replies   CommentReply[]
+  likes     CommentLikes[]
+}
+
+model CommentReply {
+  id        String              @id @default(cuid())
+  message   String
+  comment   Comment             @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+  author    User                @relation(fields: [authorId], references: [id])
+  authorId  String
+  likes     CommentReplyLikes[]
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+}
+
+model Follows {
+  follower    User   @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User   @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  @@id([followerId, followingId])
 }

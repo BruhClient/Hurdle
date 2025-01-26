@@ -67,7 +67,7 @@ export const {
             if (!token) { 
                 return token
             }
-            console.log(token)
+           
 
             const existingUser = await getUserByEmail(token.email ?? "") 
             

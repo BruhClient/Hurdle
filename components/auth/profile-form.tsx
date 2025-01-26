@@ -23,6 +23,9 @@ import { useSession } from "next-auth/react";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { UserRole } from "@prisma/client";
+import { SingleImageDropzone } from "../ProfilePicUploader";
+import { useEdgeStore } from "@/lib/edgestore";
+import { useRouter } from "next/navigation";
 
 
 
@@ -32,7 +35,7 @@ const ProfileForm = ({user} : {user : any}) => {
     const [error,setError] = useState<string>("")
     const [success,setSuccess] = useState<string>("")
     const [isPending,startTransition] = useTransition()
-
+    const router = useRouter()
     const form = useForm<ProfileSettingsPayload>({
         
         resolver : zodResolver(ProfileSettingsSchema), 
@@ -50,21 +53,58 @@ const ProfileForm = ({user} : {user : any}) => {
         }
     })
     
-    const onSubmit = (values : ProfileSettingsPayload) => { 
+    const onSubmit = async (values : ProfileSettingsPayload) => { 
         setError("")
         setSuccess("")
-        const filteredData = Object.fromEntries(
+        let filteredData = Object.fromEntries(
             Object.entries(values).filter(([_, value]) => value !== undefined)
           ) as ProfileSettingsPayload
+
         
-        startTransition(()=> {
-            settings(filteredData ).then((data) => { 
+
+        
+        
+        
+        
+        startTransition(async ()=> {
+            if (file) { 
+                const res = await edgestore.myPublicImages.upload({
+                    file, 
+                    options: { 
+                        temporary : true
+                    }, 
+    
+                    input : { 
+                        type : "profile"
+                    }
+                })
+    
+                filteredData = {
+                    ...filteredData, 
+                    image : res.url
+    
+                }
+    
+                
+                
+            }
+            settings(filteredData ).then(async (data) => { 
                 if (data.error) { 
                     setError(data.error)
                 }
                 if (data.success) {
                     update() 
+                    if (filteredData.image) { 
+                        await edgestore.myPublicImages.confirmUpload(
+                            {
+                                url : filteredData.image
+                            }
+                        )
+                    }
+                    
                     setSuccess(data.success)
+                    setFile(undefined)
+                    router.refresh()
                 }
                 
                 
@@ -79,12 +119,37 @@ const ProfileForm = ({user} : {user : any}) => {
     }
 
     
-   
-    return ( <div className="flex justify-center  mt-5 px-3">
+    const [file, setFile] = useState<File>();
+    const { edgestore } = useEdgeStore();
+
+    
+
+    return ( 
         
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 max-w-[500px] flex flex-col gap-3" >
-                <div className="flex flex-col">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-[500px] flex flex-col gap-3 " >
+            <div className=" self-center">
+
+            <SingleImageDropzone
+                    userImage={user.image}
+                    width={200}
+                    height={200}
+                    value={file}
+                    
+                    onChange={(file) => {
+                       
+                    setFile(file);
+                    }}
+                />
+
+            <div>
+                
+            </div>
+            </div>
+            
+                <div className="flex flex-col ">
+
+                
                     <FormField
                         control={form.control}
                         name="username"
@@ -160,7 +225,7 @@ const ProfileForm = ({user} : {user : any}) => {
                             <FormItem>
                                 <FormLabel>Role</FormLabel>
                                 <Select
-                                    disabled={isPending}
+                                    disabled={isPending || user.role !== UserRole.ADMIN}
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
                                 >
@@ -217,13 +282,13 @@ const ProfileForm = ({user} : {user : any}) => {
             
                 {error ? <FormError message={error}/> : ""}
                 {success ? <FormSuccess message={success}/> : ""}
-                <Button type="submit" >Save Changes</Button>
+                <Button type="submit" disabled={isPending} >Save Changes</Button>
             </form>
 
             
         
         </Form>
-    </div> );
+    );
 }
  
 export default ProfileForm;

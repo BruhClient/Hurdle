@@ -7,7 +7,10 @@ export const ProfileSettingsSchema = z.object({
     role : z.enum([UserRole.ADMIN,UserRole.USER]) , 
     password : z.optional(z.string().min(6)) , 
     newPassword : z.optional(z.string().min(6)) ,
-    email : z.optional(z.string().email())
+    email : z.optional(z.string().email()), 
+    image : z.optional(z.string())
+  
+
     
 
 }).refine((data) => { 
