@@ -69,25 +69,37 @@ const ProfileForm = ({user} : {user : any}) => {
         
         startTransition(async ()=> {
             if (file) { 
-                const res = await edgestore.myPublicImages.upload({
-                    file, 
-                    options: { 
-                        temporary : true
-                    }, 
-    
-                    input : { 
-                        type : "profile"
+                try { 
+                    
+                    if (user.image.includes("files.edgestore.dev")) { 
+                        const deleteRes = await edgestore.myPublicImages.delete({
+                            url : user.image
+        
+                        })
+                        
                     }
-                })
-    
-                filteredData = {
-                    ...filteredData, 
-                    image : res.url
-    
-                }
-    
-                
-                
+                    
+                    
+                    const res = await edgestore.myPublicImages.upload({
+                        file, 
+                        options: { 
+                            temporary : true
+                        }, 
+        
+                        input : { 
+                            type : "profile"
+                        }
+                    })
+                    filteredData = {
+                        ...filteredData, 
+                        image : res.url
+        
+                    }
+                } catch(error) { 
+                    console.log(error)
+                    setError("Something went wrong")
+                    return 
+                }      
             }
             settings(filteredData ).then(async (data) => { 
                 if (data.error) { 

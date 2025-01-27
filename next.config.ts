@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
 },
 images : {
-  domains : ["files.edgestore.dev"]
+  domains : ["files.edgestore.dev","lh3.googleusercontent.com"]
 }
 };
 
