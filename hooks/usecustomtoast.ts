@@ -7,10 +7,11 @@ import { ToastActionElement,ToastAction } from "@/components/ui/toast";
 const useCustomToast = () => {
     const {toast} = useToast()
     const loginToast = ( ) => {
-        const {dismiss} =  toast({
+        const {} =  toast({
             title : "Login required" , 
             description : "You need to be logged in to do that.", 
             variant : "destructive" , 
+            
             
             
         })

@@ -11,21 +11,26 @@ const ProfilePage = async () => {
         where : { 
             id : user!.id
         }, 
-        include : { 
-            followers : true , 
-            following : true, 
-            posts : true,
-            
-            
         
+        select :{
+            _count :  {
+                select :  { 
+                    followers : true , 
+                    following : true , 
+                    posts : true,
+                }
+            }, 
+            followers : true , 
+            following : true , 
+            posts : true
         }
     })
 
 
     const posts = dbUser?.posts ?? []
-    const followerCount = dbUser?.followers.length
-    const follwingCount = dbUser?.following.length
-    const postCount = posts.length
+    const followerCount = dbUser?._count.followers
+    const follwingCount = dbUser?._count.following
+    const postCount = dbUser?._count.posts
 
 
     

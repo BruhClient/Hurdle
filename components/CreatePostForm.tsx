@@ -16,6 +16,7 @@ import axios from "axios"
 import { CreatePostPayload, CreatePostSchema } from '@/schema/create-post';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
+import { ClipLoader, FadeLoader } from 'react-spinners';
 
 export default function CreatePostForm() {
     
@@ -145,7 +146,7 @@ export default function CreatePostForm() {
 
         <TextareaAutosize onChange={(e) => setInput(e.target.value)} className='bg-transparent px-2 py-2 rounded-lg w-full outline-none max-h-24 text-lg' placeholder='Caption'/>
         
-        <Button className='w-full' disabled={isPending} onClick={() => onSubmit()}>Post</Button >
+        <Button className='w-full flex items-center justify-center' disabled={isPending} onClick={() => onSubmit()}>{isPending ? <>Loading <ClipLoader size={15} className=' text-card'/></>:"Post" }</Button >
 
         </div>
     );

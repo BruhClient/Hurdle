@@ -40,7 +40,7 @@ const ProfilePage = async ({ params }: { params: Promise<{ slug: string }> }) =>
             id : true , 
             image :true,
             username: true, 
-            followers : true,
+         
 
 
         }
@@ -55,10 +55,13 @@ const ProfilePage = async ({ params }: { params: Promise<{ slug: string }> }) =>
         return <div>User not found !</div>
     }
     
-    const isFollowing = dbUser.followers.find((follows) => {
-        
-        return follows.followerId === user?.id && follows.followingId === dbUser.id 
-    } ) ? true : false
+    const isFollowing = await prisma.follows.findFirst({
+        where : { 
+            
+            followerId : user?.id, 
+            followingId : dbUser.id 
+        }
+    }) ? true : false
 
     
     return ( <div className="flex w-full items-center flex-col pointer-events-auto pt-9 gap-3">

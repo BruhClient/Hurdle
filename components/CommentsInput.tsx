@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import useCustomToast from "@/hooks/usecustomtoast";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { ClipLoader } from "react-spinners";
 
 interface CommentsInputProps {
     postId : string, 
@@ -65,7 +66,7 @@ const CommentsInput: FunctionComponent<CommentsInputProps> = ({postId,refetch}) 
     return ( <form className="flex gap-1" onSubmit={onSubmit}>
 
         <Input placeholder="Enter your comment" value={input} onChange={(e) => setInput(e.target.value)} />
-        <Button variant={"outline"} disabled={input === "" || isPending} >Post</Button>
+        <Button variant={"outline"} disabled={input === "" || isPending} > {isPending ? <>Loading <ClipLoader size={15} className=' text-card'/></>:"Post" }</Button>
     </form> );
 }
  

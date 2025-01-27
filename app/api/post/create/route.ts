@@ -33,7 +33,7 @@ export async function POST(req : Request) {
 
     } catch(error) { 
         if (error instanceof z.ZodError) { 
-            return new Response(error.message,{status : 422})
+            return new Response("Invalid payload type",{status : 422})
         }
         return new Response("Could not create a post",{status : 422})
     }

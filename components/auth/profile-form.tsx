@@ -26,6 +26,7 @@ import { UserRole } from "@prisma/client";
 import { SingleImageDropzone } from "../ProfilePicUploader";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useRouter } from "next/navigation";
+import { ClipLoader } from "react-spinners";
 
 
 
@@ -292,11 +293,11 @@ const ProfileForm = ({user} : {user : any}) => {
                             
                 </div>
 
-                
+                        
             
                 {error ? <FormError message={error}/> : ""}
                 {success ? <FormSuccess message={success}/> : ""}
-                <Button type="submit" disabled={isPending} >Save Changes</Button>
+                <Button type="submit" disabled={isPending} >{isPending ? <>Loading <ClipLoader size={15} className=' text-card'/></>:"Save Changes" }</Button>
             </form>
 
             

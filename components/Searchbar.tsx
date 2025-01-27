@@ -53,13 +53,13 @@ import { Button } from "./ui/button"
       <Command className=" relative overflow-visible flex-1 bg-transparent flex items-center max-w-[800px]">
         <Input onChange={(e) => {
             setInput(e.target.value)
-        }} placeholder="Search for users ..." className="bg-input text-foreground  " />
+        }} value={input} placeholder="Search for users ..." className="bg-input text-foreground  " />
         <CommandList className={`absolute top-9 w-full bg-input ${debounceValue ? "block": "hidden" }  duration-200 ease-in-out transition-opacity z-50 px-4 py-2`}>
           <CommandEmpty >No results found.</CommandEmpty>
           {users?.map((user) => {
             return <CommandItem key={user.id} className="flex items-center ">
               <UserAvatar image={user?.image ?? undefined} />
-              <Button variant={"link"} className="text-md">
+              <Button variant={"link"} className="text-md" onClick={() => setInput("")}>
                 <Link href={`/user/${user.id}`}>{user.username}</Link>
               </Button>
               
