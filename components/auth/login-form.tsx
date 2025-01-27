@@ -15,6 +15,7 @@ import FormError from "../FormError";
 import {  useRouter, useSearchParams } from "next/navigation";
 import { login } from "@/actions/login";
 import { useSession } from "next-auth/react";
+import { ClipLoader } from "react-spinners";
 
 const LoginForm= ({isModal} : {isModal : boolean}) => {
     const searchParams = useSearchParams()
@@ -120,7 +121,7 @@ const LoginForm= ({isModal} : {isModal : boolean}) => {
                 
                     {success ? <FormSuccess message={success}/> :""}
                     {error || urlError ? <FormError message={error || urlError} /> : ""}
-                    <Button type="submit" disabled={isPending}  >{showTwoFactor ? "Login" : "Send Verification Code"}</Button>
+                    <Button type="submit" disabled={isPending}  >{isPending ? <ClipLoader size={15} className=' text-card'/>:"Login" }</Button>
                     
                     
                 </form>

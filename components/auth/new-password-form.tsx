@@ -13,6 +13,7 @@ import FormError from "../FormError";
 import { newPasswordPayload, newPasswordSchema } from "@/schema/reset-password";
 import { useSearchParams } from "next/navigation";
 import { newPassword } from "@/actions/new-password";
+import { ClipLoader } from "react-spinners";
 
 const NewPasswordForm= () => {
    
@@ -72,7 +73,7 @@ const NewPasswordForm= () => {
                     
                     {success ? <FormSuccess message={success}/> :""}
                     {error ? <FormError message={error} /> : ""}
-                    <Button type="submit" disabled={isPending}  >Reset Password</Button>
+                    <Button type="submit" disabled={isPending}  >{isPending ? <ClipLoader size={15} className=' text-card'/>:"New Password" }</Button>
                     
                     
                 </form>

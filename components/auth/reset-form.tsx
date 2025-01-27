@@ -12,6 +12,7 @@ import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
 import { ResetPayload, ResetSchema } from "@/schema/reset-password";
 import { reset } from "@/actions/reset";
+import { ClipLoader } from "react-spinners";
 
 const ResetForm= () => {
    
@@ -65,7 +66,7 @@ const ResetForm= () => {
                     
                     {success ? <FormSuccess message={success}/> :""}
                     {error ? <FormError message={error} /> : ""}
-                    <Button type="submit" disabled={isPending}  >Send reset email</Button>
+                    <Button type="submit" disabled={isPending}  >{isPending ? <ClipLoader size={15} className=' text-card'/>:"Send Reset Email" }</Button>
                     
                     
                 </form>

@@ -13,6 +13,7 @@ import { useState, useTransition } from "react";
 import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
 import { register } from "@/actions/register";
+import { ClipLoader } from "react-spinners";
 
 const RegisterForm= ({isModal} : {isModal : boolean}) => {
     
@@ -93,7 +94,7 @@ const RegisterForm= ({isModal} : {isModal : boolean}) => {
                     /> 
                     {success ? <FormSuccess message={success}/> :""}
                     {error ? <FormError message={error} /> :""}
-                    <Button type="submit" className="mb-3" disabled={isPending}>Register</Button>
+                    <Button type="submit" className="mb-3" disabled={isPending}>{isPending ? <ClipLoader size={15} className=' text-card'/>:"Register" }</Button>
                     
    
                     
