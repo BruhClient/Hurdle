@@ -15,7 +15,7 @@ const edgeStoreRouter = es.router({
     }
     
   )).path(({input}) => [{type : input.type}])
-  .beforeDelete(({ ctx, fileInfo }) => {
+  .beforeDelete(({ }) => {
    
     return true; // allow delete
   }),

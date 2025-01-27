@@ -1,9 +1,7 @@
 import ProfileForm from "@/components/auth/profile-form";
-import PreviewPost from "@/components/PreviewPost";
 import UserPost from "@/components/UserPost";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/session";
-import { Post } from "@prisma/client";
 
  
 const ProfilePage = async () => {

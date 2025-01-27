@@ -1,9 +1,7 @@
-import { auth } from "@/lib/auth"
+
 import { prisma } from "@/lib/prisma"
 import { getCurrentUser } from "@/lib/session"
 import { CommentLikeSchema } from "@/schema/comment-like"
-import { LikeSchema } from "@/schema/like"
-import { Axios, AxiosError } from "axios"
 import { z } from "zod"
 
 

@@ -9,7 +9,6 @@ import { getTwoFactorAuthConfimrationByUserId } from "./twofactor-confimration"
 import { UserRole } from "@prisma/client"
 import { getAccountByUserId } from "./account"
 import {nanoid} from "nanoid"
-import { revalidatePath } from "next/cache"
 
 export const { 
     handlers : {GET,POST}, 

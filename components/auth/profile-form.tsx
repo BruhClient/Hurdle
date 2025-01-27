@@ -19,13 +19,14 @@ import {
 import { ProfileSettingsSchema,ProfileSettingsPayload } from "@/schema/profile-settings";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Switch } from "../ui/switch";
-import { useSession } from "next-auth/react";
+import { SessionContextValue, useSession } from "next-auth/react";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { UserRole } from "@prisma/client";
 import { SingleImageDropzone } from "../ProfilePicUploader";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useRouter } from "next/navigation";
+
 
 
 

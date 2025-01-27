@@ -9,7 +9,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Social } from "./socials";
-import { Suspense, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
 import { register } from "@/actions/register";
@@ -101,7 +101,7 @@ const RegisterForm= ({isModal} : {isModal : boolean}) => {
          
             </Form>
 
-            <Suspense><Social /></Suspense>
+            <Social />
             <Button asChild variant={"link"} className="text-card-foreground w-full mt-3">
                 <Link href={"/auth/login"} >Already have an account ?</Link>
             </Button>

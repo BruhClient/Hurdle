@@ -13,7 +13,7 @@ const UserPost: FunctionComponent<UserPostProps> = ({posts}) => {
     return ( <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 pb-5 gap-2 max-w-[1000px]">
         {sortedPosts.map(({id}) => {
 
-            return <Suspense key={id} fallback={<Skeleton className="w-full h-9"/>}>
+            return <Suspense key={id} fallback={<Skeleton className="w-full h-40"/>}>
                     <PreviewPost  postId={id} />
                 </Suspense>
         })}

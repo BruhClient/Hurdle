@@ -1,5 +1,4 @@
-import { DEFAULT_REFETCH_LIMIT } from "@/config"
-import { auth } from "@/lib/auth"
+
 import { prisma } from "@/lib/prisma"
 import { getCurrentUser } from "@/lib/session"
 import { z } from "zod"
@@ -40,7 +39,7 @@ export async function GET(req : Request) {
 
         const followedUsersId = followings.map((user) => user.followingId)
         followedUsersId.push(user.id)
-        let posts = await prisma.post.findMany({ 
+        const posts = await prisma.post.findMany({ 
             take : parseInt(limit) , 
             skip : parseInt(page) * parseInt(limit), 
             orderBy : { 

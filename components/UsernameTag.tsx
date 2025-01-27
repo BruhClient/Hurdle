@@ -1,7 +1,6 @@
 "use client"
 
 import { FunctionComponent } from "react";
-import { Button } from "./ui/button";
 import Link from "next/link";
 
 interface UsernameTagProps {

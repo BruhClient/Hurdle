@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth"
+
 import { prisma } from "@/lib/prisma"
 import { getCurrentUser } from "@/lib/session"
 import { CreatePostSchema } from "@/schema/create-post"

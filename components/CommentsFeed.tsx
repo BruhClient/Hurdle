@@ -1,8 +1,7 @@
-import { DEFAULT_COMMENT_REFETCH_LIMIT, DEFAULT_REFETCH_LIMIT } from "@/config";
-import { useIntersection } from "@mantine/hooks";
-import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
+import { DEFAULT_COMMENT_REFETCH_LIMIT } from "@/config";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { FunctionComponent, useEffect, useMemo, useRef, useState } from "react";
+import { FunctionComponent, useEffect } from "react";
 import Comment from "./Comment";
 import { ExtendedComment } from "@/types/comment";
 import CommentsInput from "./CommentsInput";

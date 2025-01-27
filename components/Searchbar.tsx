@@ -39,7 +39,7 @@ import { Button } from "./ui/button"
 
     useEffect(() => { 
       refetch()
-    },[debounceValue])
+    },[debounceValue,refetch])
 
     
     const users = useMemo(() => { 

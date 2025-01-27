@@ -9,7 +9,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { LoginPayload, LoginSchema } from "@/schema/login";
 import { Social } from "./socials";
-import { Suspense, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
 import {  useRouter, useSearchParams } from "next/navigation";
@@ -126,7 +126,7 @@ const LoginForm= ({isModal} : {isModal : boolean}) => {
                 </form>
             </Form>
             <Button variant={"link"} className="px-0 text-sm opacity-40 hover:opacity-100 ml-1" ><Link href={"/auth/reset"}>Forgot password ?</Link></Button>
-            <Suspense><Social /></Suspense>
+            <Social />
             
             <Button asChild variant={"link"} className=" w-full mt-3">
                 <Link href={"/auth/register"} >Don't have an account ?</Link>

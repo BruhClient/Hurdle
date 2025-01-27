@@ -1,6 +1,5 @@
 
 import { prisma } from "@/lib/prisma"
-import { getCurrentUser } from "@/lib/session"
 import { z } from "zod"
 
 export async function GET(req : Request) { 

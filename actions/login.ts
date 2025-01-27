@@ -4,13 +4,11 @@ import { getUserByEmail } from "@/lib/users"
 import { LoginPayload, LoginSchema } from "@/schema/login"
 import { generateVerificationToken } from "@/lib/verification-token"
 import { signIn } from "@/lib/auth"
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 import { sendTwoFactorAuthEmail, sendVerificationEmail } from "@/lib/mail"
 import { AuthError } from "next-auth"
 import { generateTwoFactorAuthToken, getTwoFactorAuthTokenByEmail } from "@/lib/twofactor-auth-token"
 import { prisma } from "@/lib/prisma"
 import { getTwoFactorAuthConfimrationByUserId } from "@/lib/twofactor-confimration"
-import { revalidatePath } from "next/cache"
 export const login = async (data : LoginPayload , callbackUrl : string | null ) => {
     
     const validatedFields = LoginSchema.safeParse(data)
