@@ -30,7 +30,7 @@ const PostFeed = ({q} : PostFeedProps) => {
 
     const {data,hasNextPage,fetchNextPage,isFetching,refetch} = useInfiniteQuery(
         {
-            queryKey : ["Infinite Query"] , 
+            queryKey : ["Infinite Query",q] , 
             queryFn : async ({pageParam}) => {
                 const query = `/api/post/feed?page=${pageParam}&limit=${DEFAULT_REFETCH_LIMIT}&q=${q}`
                 const {data} = await axios.get(query)

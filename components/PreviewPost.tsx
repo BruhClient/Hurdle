@@ -47,7 +47,7 @@ const PreviewPost: FunctionComponent<PreviewPostProps> = async ({postId}) => {
     const currentLike = post.likes.find((like) => like.userId === user?.id) ? true : false
     const currentLikes = post.likes.length
     const initialComments = post.comments.length
-    return ( <div>
+    return ( <div className="flex justify-center items-center">
         <Dialog>
             <DialogTrigger>
                 

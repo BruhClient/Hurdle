@@ -10,7 +10,7 @@ interface UserPostProps {
 const UserPost: FunctionComponent<UserPostProps> = ({posts}) => {
 
     const sortedPosts = posts.reverse()
-    return ( <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 pb-5 gap-2 max-w-[1000px]">
+    return ( <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 pb-5 gap-2 max-w-[1000px] align-center">
         {sortedPosts.map(({id}) => {
 
             return <Suspense key={id} fallback={<Skeleton className="w-full h-40"/>}>

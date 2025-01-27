@@ -6,6 +6,7 @@ import { deletePost } from "@/actions/delete-post";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useEdgeStore } from "@/lib/edgestore";
+import { ClipLoader } from "react-spinners";
 
 interface DeletePostButtonProps {
     postId : string,
@@ -20,7 +21,7 @@ const DeletePostButton: FunctionComponent<DeletePostButtonProps> = ({postId}) =>
         startTransition(
             async () => { 
                 
-                deletePost(postId).then(async (data) => { 
+                await deletePost(postId).then(async (data) => { 
                     const urls = data?.urls as string[]
                     if (urls) { 
                         for (let i = 0; i < urls.length; i++) {
@@ -55,7 +56,7 @@ const DeletePostButton: FunctionComponent<DeletePostButtonProps> = ({postId}) =>
     return ( 
     
         <Button onClick={onClick} variant={"destructive"} disabled={isPending}>
-        Delete Post
+        {isPending ? <>Loading <ClipLoader size={15} className=' text-card'/></>:"Delete" }
     </Button>
  
      );

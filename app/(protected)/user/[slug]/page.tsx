@@ -77,7 +77,7 @@ const ProfilePage = async ({ params }: { params: Promise<{ slug: string }> }) =>
                         
                     </div>
 
-                    <UserMetrics initialFollowerAmount={dbUser._count.followers} initialFollowingAmount={dbUser._count.following} initialPostCount={dbUser._count.posts}/>
+                    <UserMetrics userId={dbUser.id} initialFollowerAmount={dbUser._count.followers} initialFollowingAmount={dbUser._count.following} initialPostCount={dbUser._count.posts}/>
 
                     
             

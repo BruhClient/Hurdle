@@ -1,4 +1,7 @@
 import ProfileForm from "@/components/auth/profile-form";
+import UserFollow from "@/components/UserFollow";
+import UserFollowing from "@/components/UserFollowing";
+import UserMetrics from "@/components/UserMetrics";
 import UserPost from "@/components/UserPost";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/session";
@@ -26,10 +29,13 @@ const ProfilePage = async () => {
         }
     })
 
+    if (!dbUser) { 
+        return <div className="px-2 text-lg">Could not find User</div>
+    }
 
     const posts = dbUser?.posts ?? []
     const followerCount = dbUser?._count.followers
-    const follwingCount = dbUser?._count.following
+    const followingCount = dbUser?._count.following
     const postCount = dbUser?._count.posts
 
 
@@ -42,19 +48,7 @@ const ProfilePage = async () => {
         
         <div className="max-w-[500px] w-full h-1 bg-foreground rounded-xl opacity-25 my-3" />
 
-        <div className="flex gap-7 text-xl">
-            <div>
-            {followerCount} followers
-            </div>
-            <div>
-            {follwingCount} followings
-            </div>
-            <div>
-                {postCount} posts
-            </div>
-            
-           
-        </div>
+        <UserMetrics initialFollowerAmount={followerCount} initialPostCount={postCount} initialFollowingAmount={followingCount} userId={user!.id}/>
 
         <div className="text-2xl">My Posts</div>
         <UserPost posts={posts} />

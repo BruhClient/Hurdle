@@ -8,6 +8,7 @@ import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import { FollowUserPayload } from "@/schema/follow-user";
 import { useRouter } from "next/navigation";
+import { ClipLoader } from "react-spinners";
 
 interface FollowButtonProps {
     userId : string ,
@@ -20,7 +21,7 @@ const FollowButton: FunctionComponent<FollowButtonProps> = ({userId,isFollowing}
     const [following,setFollowing] = useState(isFollowing)
     const {toast} = useToast()
     const router = useRouter()
-    const {mutate : follow} = useMutation({
+    const {mutate : follow,isPending} = useMutation({
         mutationKey :["follow"], 
         mutationFn : async () => { 
             const payload:FollowUserPayload = {
@@ -49,10 +50,10 @@ const FollowButton: FunctionComponent<FollowButtonProps> = ({userId,isFollowing}
 
     if (following) { 
         return ( 
-            <Button onClick={() => follow()}>Following<ChevronDown /></Button>
+            <Button onClick={() => follow()} disabled={isPending}>{isPending ? <ClipLoader size={15} className=' text-card'/>:"Following" }<ChevronDown /></Button>
          );
     } else { 
-        return <Button onClick={() => follow()} variant={"outline"}>Follow</Button>
+        return <Button onClick={() => follow()} variant={"outline"} disabled={isPending}>{isPending ? <ClipLoader size={15} className=' text-card'/>:"Follow" }</Button>
     }
     
 }
