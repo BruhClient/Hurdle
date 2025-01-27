@@ -1,4 +1,4 @@
 export default function Default() {
     
-    return <div className="z-50">IDK MAN</div>
+    return <div className="z-50"></div>
   }

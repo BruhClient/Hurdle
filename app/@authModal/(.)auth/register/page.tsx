@@ -9,7 +9,7 @@ const RegisterModal= async () => {
         if (session) { 
             return null
         }
-    return ( <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"><RegisterForm isModal={true}/></div> );
+    return ( <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"><RegisterForm isModal={true}/></div> );
 }
  
 export default RegisterModal;
