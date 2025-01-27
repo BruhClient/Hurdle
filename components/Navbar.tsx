@@ -12,7 +12,7 @@ const Navbar = async () => {
 
     const session = await auth()
    
-    return ( <div className="flex justify-between py-2 px-4 items-center gap-4 border-b-2 border-input ">
+    return ( <div className="flex justify-between items-center px-2 py-2 fixed w-full top-0 z-50 pointer-events-auto bg-background border-input border-b-2">
 
         <Logo />
 

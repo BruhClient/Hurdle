@@ -24,7 +24,7 @@ const PostDisplay: FunctionComponent<PostDisplayProps> = ({post,currentLike,init
         <div className="flex items-center gap-3 ">
             <UserAvatar image={post.author.image}/>
             
-            <UsernameTag username={post.author.username} userId={post.author.id} className="text-lg poitner"/>
+            <UsernameTag username={post.author.username} userId={post.author.id} className="text-lg"/>
           
         </div>
         

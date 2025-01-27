@@ -1,7 +1,15 @@
+import { SkeletonCard } from "@/components/SkeletonCard";
 
  
-const Loading = () => {
-    return ( <div>Loading</div> );
+const LoadingPage = () => {
+    return (<div className="flex flex-col w-full justify-center items-center gap-4">
+        
+        
+        <SkeletonCard />
+        <SkeletonCard />
+        
+    </div> );
 }
  
-export default Loading;
+ 
+export default LoadingPage;

@@ -10,6 +10,7 @@ import CommentsButton from "./CommentsButton";
 import DeletePostButton from "./DeletePostButton";
 import { formatTimeToNow } from "@/lib/utils";
 import UserAvatar from "./UserAvatar";
+import Image from "next/image";
 interface PreviewPostProps {
     postId : string , 
      
@@ -50,7 +51,7 @@ const PreviewPost: FunctionComponent<PreviewPostProps> = async ({postId}) => {
         <Dialog>
             <DialogTrigger>
                 
-                    <img src={images[0]} alt="" />
+                    <Image src={images[0]} alt="" width={300} height={300} objectFit={"cover"} />
                 
             </DialogTrigger>
 

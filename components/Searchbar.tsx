@@ -54,8 +54,8 @@ import { Button } from "./ui/button"
         <Input onChange={(e) => {
             setInput(e.target.value)
         }} placeholder="Search for users ..." className="bg-input text-foreground  " />
-        <CommandList className={`absolute top-9 w-full bg-input ${debounceValue ? "": "opacity-0" } duration-200 ease-in-out transition-opacity z-50 px-4 py-2`}>
-          <CommandEmpty>No results found.</CommandEmpty>
+        <CommandList className={`absolute top-9 w-full bg-input ${debounceValue ? "block": "hidden" }  duration-200 ease-in-out transition-opacity z-50 px-4 py-2`}>
+          <CommandEmpty >No results found.</CommandEmpty>
           {users?.map((user) => {
             return <CommandItem key={user.id} className="flex items-center ">
               <UserAvatar image={user?.image ?? undefined} />

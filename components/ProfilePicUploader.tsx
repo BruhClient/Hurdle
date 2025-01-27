@@ -2,6 +2,7 @@
 
 import { formatFileSize } from '@edgestore/react/utils';
 import { UploadCloudIcon, X } from 'lucide-react';
+import Image from 'next/image';
 import * as React from 'react';
 import { useDropzone, type DropzoneOptions } from 'react-dropzone';
 import { twMerge } from 'tailwind-merge';
@@ -145,7 +146,7 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
           ) : (
             // Upload Icon
             
-                <img src={userImage} alt="User Profile" className='w-full h-full object-cover' />
+                <Image fill objectFit='cover'  src={userImage} alt="" quality={70} />
            
           )}
 

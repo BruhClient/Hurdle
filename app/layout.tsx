@@ -43,7 +43,11 @@ export default function RootLayout({
 
           
           <Navbar /> 
-          {children}
+
+          <div className="mt-20 mb-12">
+            {children}
+          </div>
+          
           
           {authModal}
           <Toaster />

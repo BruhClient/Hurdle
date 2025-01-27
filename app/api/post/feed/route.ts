@@ -7,34 +7,45 @@ import { z } from "zod"
 export async function GET(req : Request) { 
     const url = new URL(req.url)
     try { 
-        const user = await getCurrentUser()
+        
     
 
-    const {limit , page } = z.object({
+    const {limit , page,q } = z.object({
         limit : z.string(), 
         page : z.string(), 
+        q : z.enum(["General","Custom"])
         
     }).parse( { 
        
         limit : url.searchParams.get("limit") , 
-        page : url.searchParams.get("page")
+        page : url.searchParams.get("page"), 
+        q : url.searchParams.get("q")
     } )
     
-    if (user) { 
+    if (q === "Custom") { 
+        const user = await getCurrentUser()
+
+        if (!user) { 
+            return new Response("Unauthorized" , {status : 401})
+        }
         const followings = await prisma.follows.findMany({ 
             where : { 
-                followingId : user.id
+                followerId : user.id
             }, 
-            include : { 
-                follower : true
+            
+            select : { 
+                followingId : true
             }
         })
 
-        const followedUsersId = followings.map((user) => user.follower.id)
+        const followedUsersId = followings.map((user) => user.followingId)
+        followedUsersId.push(user.id)
         let posts = await prisma.post.findMany({ 
             take : parseInt(limit) , 
             skip : parseInt(page) * parseInt(limit), 
-            
+            orderBy : { 
+                createdAt : "desc"
+            },
             where : { 
                 authorId : { 
                     in : followedUsersId
@@ -49,22 +60,7 @@ export async function GET(req : Request) {
             }
         })
 
-        if (posts.length === 0 )  { 
-            posts = await prisma.post.findMany({ 
-                take : parseInt(limit) , 
-                skip : parseInt(page) * parseInt(limit), 
-                orderBy : { 
-                    createdAt : "desc"
-                }, 
-                include :  { 
-                    author : true , 
-                    comments : true , 
-                    likes : true , 
-                    
-                }
-    
-            })  
-        }
+        
         return new Response(JSON.stringify(posts))
 
 

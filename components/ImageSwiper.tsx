@@ -14,6 +14,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface ImageSwiperProps{ 
   images : string[]
@@ -46,7 +47,7 @@ const ImageSwiper =  ({images} : ImageSwiperProps) => {
       
     <CarouselContent>
     {images.map((url) => { 
-        return <CarouselItem className="p-0 " key={url}><img className="object-contain max-h-[600px] w-full" src={url} alt=""  loading='lazy' /></CarouselItem>
+        return <CarouselItem className="p-0 flex items-center justify-center" key={url}><Image width={600} height={600} objectFit={"contain"}   src={url} alt="" quality={70} loading='eager' property="true" /></CarouselItem>
       })}
     </CarouselContent>
     <div className="ext-sm text-muted-foreground absolute top-2 right-4">

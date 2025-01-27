@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
 },
+images : {
+  domains : ["files.edgestore.dev"]
+}
 };
 
 export default nextConfig;
